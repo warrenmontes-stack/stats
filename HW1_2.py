@@ -19,4 +19,4 @@ for trial in range(n):
 probability = count / n
 
 print(f"Estimated probability = {probability}")
-#AI Used to solve this problem
+#AI Assistance Used to solve this problem
