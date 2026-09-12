@@ -27,5 +27,7 @@ for n in range(1, 1001):
 plt.plot(n_values, rf_values)
 plt.xlabel("n")
 plt.ylabel("Rf")
+# Title does not add anything beyond axis labels, so I suggest removing.
 plt.title("Relative Frequency vs. n")
+plt.savefig('HW1_1.png', dpi=300, bbox_inches='tight')
 plt.show()

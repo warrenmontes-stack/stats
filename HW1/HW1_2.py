@@ -20,3 +20,6 @@ probability = count / n
 
 print(f"Estimated probability = {probability}")
 #AI Assistance Used to solve this problem
+# After you have solve it, make sure you understand each step.
+# I also suggest you try to solve again on your own without looking at this solution
+# a day later to ensure you understood the solution.

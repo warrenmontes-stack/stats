@@ -22,6 +22,7 @@ for experiment in range(num_experiments):
     # Each experiment contains 100 Bernoulli trials
     for trial in range(n):
 
+        # Could use random.choice([0, 1]
         result = random.choices(
             [0, 1],
             weights=[q, p]
@@ -114,4 +115,7 @@ plt.savefig("HW2_4.png")
 plt.show()
 # ---------------------------------------------------------------------
 #  AI assistance used to solve this problem without numpy assistance.
+#  Your solution looks almost fully AI generated. I suggest you start
+#  with your own solution and only use AI to make minor suggestions or
+#  to answer questions about why something is not working when you get stuck.
 # ---------------------------------------------------------------------
