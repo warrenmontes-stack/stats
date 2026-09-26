@@ -35,6 +35,7 @@ Pb = []
 for xi in x:
     Pb.append(math.comb(h, xi) * p**xi * (1-p)**(h-xi))
 
+# It would be good to mention a check based on the calculation done in class.
 # Plot
 plt.plot(x, Ps, 'o-', label='Simulation')
 plt.plot(x, Pp, 's-', label='Poisson')
@@ -44,7 +45,7 @@ plt.xlabel('Number of Flares per Day (x)')
 plt.ylabel('Probability P(x)')
 plt.title('Simulated, Poisson, and Binomial Flare Distributions')
 plt.legend()
-
+plt.savefig("HW3_1a.png", dpi=300, bbox_inches="tight")
 plt.show()
 
 # Time Between Flares
@@ -62,5 +63,5 @@ plt.hist(time_between_flares, bins=30)
 plt.xlabel('Time Between Flares (hours)')
 plt.ylabel('Frequency')
 plt.title('Time Between Simulated Solar Flares')
-
+plt.savefig("HW3_1b.png", dpi=300, bbox_inches="tight")
 plt.show()
