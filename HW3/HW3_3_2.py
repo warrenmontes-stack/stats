@@ -15,7 +15,7 @@ Sb2 = np.var(samples, axis=1)
 average_Sb2 = np.mean(Sb2)
 variance_Sb2 = np.var(Sb2)
 
-# Plot probability density histogram
+# Plot (3_3_1 used as reference for formatting the title)
 plt.hist(Sb2, bins=30, density=True)
 
 plt.xlabel('Sample Variance (Sb^2)')
