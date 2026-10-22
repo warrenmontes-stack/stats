@@ -39,32 +39,46 @@ plt.title('GOES Event List M-Class Flares')
 plt.savefig('project_I.png', dpi=300, bbox_inches='tight')
 
 # ---------------------------------------------------------------------------------------- 
-# Figure A: All solar flares during 2000
 
-# Convert flare peak times to datetime values
+# Figure A: Solar flare intensity throughout 2000
+
+# Convert the peak times into datetime values
 times = pd.to_datetime(df['event_peaktime'])
 
-# Convert flare classifications into numerical values
-classes = df['fl_goescls'].astype(str)
+# Extract the flare classifications
+classes = df['fl_goescls'].astype(str).str.strip()
 
-# Use the first letter to identify each flare class
-flare_type = classes.str[0]
+# Separate the class letter from the numerical magnitude
+flare_type = classes.str[0].str.upper()
+magnitude = pd.to_numeric(classes.str[1:], errors='coerce')
 
-# Assign each class a numerical position
-class_levels = {'A': 0, 'B': 1, 'C': 2, 'M': 3, 'X': 4}
-levels = flare_type.map(class_levels)
+# Convert GOES flare classifications to peak X-ray flux (W/m^2)
+class_flux = {
+    'A': 1e-8,
+    'B': 1e-7,
+    'C': 1e-6,
+    'M': 1e-5,
+    'X': 1e-4 }
 
-# Plot all recorded flare events
+flux = flare_type.map(class_flux) * magnitude
+
+# Keep only valid observations
+valid = times.notna() & flux.notna() & (flux > 0)
+
+# Plot Creation
 plt.figure(figsize=(12, 5))
-plt.scatter(times, levels, s=5)
+plt.scatter(times[valid], flux[valid], s=8, alpha=0.5)
 
-plt.yticks([0, 1, 2, 3, 4], ['A', 'B', 'C', 'M', 'X'])
+plt.yscale('log')
+
 plt.xlabel('Time of Peak (UTC)')
-plt.ylabel('Solar Flare Class')
-plt.title('GOES Solar Flare Events During 2000')
-plt.grid(True)
+plt.ylabel('Peak X-ray Flux (W/m²)')
+plt.title('GOES Solar Flare Intensity During 2000')
+plt.grid(True, which='both', alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('project/flares/project_Ia.png')
+
+# Save the figure in the same folder as project_I.py
+plt.savefig(Path(__file__).resolve().parent / 'project_Ia.png', dpi=150)
 plt.close()
 
